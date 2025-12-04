@@ -16,23 +16,26 @@ import zipfile
 try:
     file_name = sys.argv[1]
 except IndexError:
-    # Exact message Gradescope expects
+    
     print("Usage: python ziplist.py <file.zip>", file=sys.stderr)
     sys.exit(1)
 
-# Check if the file exists
+# Check if file exists
 if not os.path.isfile(file_name):
     print(f"File not found: python ziplist.py {file_name}", file=sys.stderr)
     sys.exit(1)
 
-# Open the zip file and list its contents
+# Try opening the zip file
 try:
     with zipfile.ZipFile(file_name, 'r') as zip_file:
+      
         for name in zip_file.namelist():
             print(name)
 except zipfile.BadZipFile:
+    
     print(f"Bad zip file: python ziplist.py {file_name}", file=sys.stderr)
     sys.exit(1)
+
 
 
 
