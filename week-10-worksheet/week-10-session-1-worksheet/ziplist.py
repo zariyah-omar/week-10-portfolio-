@@ -12,16 +12,19 @@ import sys
 import os
 import zipfile
 
+# Handle missing filename with exception
 try:
     file_name = sys.argv[1]
 except IndexError:
-    print("Usage: python ziplist.py <filename.zip>", file=sys.stderr)
+    print("Usage: python ziplist.py <file.zip>", file=sys.stderr)
     sys.exit(1)
 
+# Check if the file exists
 if not os.path.isfile(file_name):
     print(f"File not found: python ziplist.py {file_name}", file=sys.stderr)
     sys.exit(1)
 
+# Try opening the zip file
 try:
     with zipfile.ZipFile(file_name, 'r') as zip_file:
         for name in zip_file.namelist():
@@ -29,6 +32,7 @@ try:
 except zipfile.BadZipFile:
     print(f"Bad zip file: python ziplist.py {file_name}", file=sys.stderr)
     sys.exit(1)
+
 
 # Error message: "Usage: python ziplist.py <filename.zip>"
 
